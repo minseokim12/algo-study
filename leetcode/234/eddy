@@ -1,0 +1,25 @@
+class Solution {
+   class Solution {
+    public boolean isPalindrome(ListNode head) {
+        Stack<Integer> stk1 = new Stack<>();
+        do {
+            stk1.add(head.val);
+            head = head.next;
+        } while (head != null);
+
+        Stack<Integer> stk2 = new Stack<>();
+        while (stk1.size() != stk2.size()) {
+            int top = stk1.pop();
+         
+            if (stk1.size() == stk2.size()) break;            
+            stk2.add(top);
+        }
+        
+        while (!stk1.isEmpty()) {
+            int top = stk1.pop();
+            if (top != stk2.pop()) return false;
+        }
+        return true;
+    }
+}
+}
