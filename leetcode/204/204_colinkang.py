@@ -7,20 +7,16 @@
 
 class Solution:
     def countPrimes(self, n: int) -> int:
-        nonPrimeMarker = [0] * n
-        countPrimes = 0
-        for currentNumber in range(2, n):
-            if nonPrimeMarker[currentNumber]: continue
-            countPrimes += 1
-            # square
-            markStart = currentNumber**2
-            lastBefore = (n - 1)
-            # // a divide b then ceil
-            round = lastBefore // currentNumber
-            roundAdjust = round - currentNumber + 1
-            nonPrimeMark = [1] * roundAdjust
-            nonPrimeMarker[markStart:n:currentNumber] = nonPrimeMark
-        return countPrimes
+        countPrime = 0
+        nonPrimeMark = [0] * n
+        for i in range(2, n):
+            if nonPrimeMark[i]: continue
+            countPrime += 1
+            makrStart = i**2
+            jumpEnd = n - 1
+            jumpRound = jumpEnd // i - i + 1
+            nonPrimeMark[makrStart:n:i] = [1] * jumpRound
+        return countPrime
 
 import unittest
 
