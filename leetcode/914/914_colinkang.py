@@ -15,9 +15,14 @@ from functools import reduce
 class Solution:
 
     def hasGroupsSizeX(self, deck):
+        # [1, 2, 3, 4, 4, 3, 2, 1]
         count = collections.Counter(deck)
+        # Counter({1: 2, 2: 2, 3: 2, 4: 2})
         N = len(deck)
+        # N=8,
         for X in range(2, N+1):
+            # 8 % 2 == 0 >> all count = % 2 == 0 then same * : 8 % 2 false 8 % 4 true >> then same
+            # 9 % 2 ==0 skip >> 9 % 3 == && all count % 3 == 0 then same
             if N % X == 0:
                 if all(v % X == 0 for v in count.values()):
                     return True
