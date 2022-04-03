@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+// https://m.blog.naver.com/kks227/220917078260
 class Solution {
     int[] W;
     int[] fail;
