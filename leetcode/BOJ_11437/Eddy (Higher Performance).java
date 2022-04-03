@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+// https://www.quora.com/What-are-the-specifics-in-implementing-an-O-N-log-N-Lowest-Common-Ancestor-algorithm
 class Main {
 
     private static int N, log_N;
