@@ -28,24 +28,29 @@ class Main:
         # n : total size of play
         # m : given disk
 
-        max_time = max(play_time_list)
-        max_subdisk_time = 1
-        total_time = sum(play_time_list)
+        # left 조건
+        max_one_of_play = max(play_time_list)
+        # right 조건
+        sum_all_of_play = sum(play_time_list)
+        max_sub_sum_one_disk = 1
         num_play_list = n
         limit_of_disk = m
-        count_of_disk = 1
 
-        while (max_subdisk_time <= total_time) :
-            mid = (max_subdisk_time+total_time)//2
+        while (max_sub_sum_one_disk <= sum_all_of_play) :
+            bar_of_disk = (max_sub_sum_one_disk+sum_all_of_play)//2
 
-            if (mid < max_time):
-                max_subdisk_time = mid + 1
+            # 중간값이 가장 긴것보다 작다는 것은 1, 1, 1, 1, 5 이런 경우
+            if (bar_of_disk < max_one_of_play):
+                max_sub_sum_one_disk = bar_of_disk + 1
                 continue
 
+            # 각 디스크 벼로
             count_of_disk = 1
             play_time = 0
             for i in range(num_play_list):
-                if((play_time + play_time_list[i]) <= mid): # 만약 현재 블루레이에 비디오를 더 넣을 수 있다면
+
+                # 하나 더 넣었는데 중간 값보다 작거나 같으면 : play 추가 else 디스크 추가
+                if((play_time + play_time_list[i]) <= bar_of_disk):
                     play_time += play_time_list[i]
                 else:
                     count_of_disk += 1
@@ -55,11 +60,11 @@ class Main:
                     break
 
             if (count_of_disk > limit_of_disk):
-                max_subdisk_time = mid + 1
+                max_sub_sum_one_disk = bar_of_disk + 1
             else:
-                total_time = mid - 1
+                sum_all_of_play = bar_of_disk - 1
 
-        return max_subdisk_time
+        return max_sub_sum_one_disk
 
 
 import unittest
@@ -82,7 +87,7 @@ class TestSum(unittest.TestCase):
         if (self.isMacOS() == False) :
             print(result)
         else:
-            self.assertEqual(result, expected_result, "The result is incorrect")
+            self.assertEqual(expected_result, result, "The result is incorrect")
 
     def isMacOS(self) -> bool:
         return os.path.isdir("/Library")
